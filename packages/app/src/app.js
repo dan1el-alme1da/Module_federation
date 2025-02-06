@@ -11,9 +11,11 @@ import {
     NavItem
 } from 'reactstrap';
 
-//css
+//CSS
+import './app.css';
 
-const App () => {
+//MF
+const App = () => {
     return(
         <Router>
             <div>
