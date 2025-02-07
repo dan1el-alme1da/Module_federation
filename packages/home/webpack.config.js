@@ -42,12 +42,12 @@ module.exports = {
             title: 'App',
         }),
         new ModuleFederationPlugin({
-            name: 'Homeapp',
+            name: 'HomeApp',
             filename: 'remoteEntry.js',
             exposes: {
-                './HomeApp': './src/Home',
+                './HomePage': './src/Home',
             }        
-            }),
+        }),
         
     ],
 };
