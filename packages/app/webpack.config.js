@@ -43,11 +43,10 @@ module.exports = {
         }),
         new ModuleFederationPlugin({
             name: 'app',
-            filename: 'remoteEntry.js',
-            exposes: {
-                './App': './src/app',
-            },
-            shared: ['react', 'react-dom', 'react-router-dom'],
+            remotes: {
+                HomeApp: 'HomeApp@http://localhost:9002/remoteEntry.js',
+                HomeApp: 'contactApp@http://localhost:9003/remoteEntry.js'
+            }
         }),
     ],
 };
