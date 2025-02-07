@@ -41,13 +41,6 @@ module.exports = {
             template: 'public/index.html',
             title: 'App',
         }),
-        new ModuleFederationPlugin({
-            name: 'app',
-            filename: 'remoteEntry.js',
-            exposes: {
-                './App': './src/app',
-            },
-            shared: ['react', 'react-dom', 'react-router-dom'],
-        }),
+        
     ],
 };
