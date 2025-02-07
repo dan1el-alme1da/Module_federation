@@ -19,7 +19,7 @@ const App = () => {
     return(
         <Router>
             <div>
-                <Navbar color="light" light expend = "md">
+                <Navbar color="light" light expand = "md">
                     <Nav className = "mr-auto" Navbar>
                         <NavItem>
                             <Link to="/">Home</Link>
@@ -33,3 +33,4 @@ const App = () => {
         </Router>
     )
 }
+export default App;
