@@ -1,50 +1,33 @@
-import React, { Suspense } from "react";
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link 
-} from 'react-router-dom';
-import {
-    Navbar,
-    Nav,
-    NavItem
-} from 'reactstrap';
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { Suspense } from "react";
+import HomePage from "./HomePage";
+import ContactPage from "./ContactPage";
 
-//CSS
-import './app.css';
+function App() {
+  return (
+    <Router>
+      <div>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/contact">Contact</Link>
+            </li>
+          </ul>
+        </nav>
 
-//MF
-const App = () => {
-    const HomePage = React.lazy(() => import("HomeApp/HomePage"));
-    const ContactPage = React.lazy(() => import("ContactApp/ContactPage"));
-    return(
-        <Router>
-            <div>
-                <Navbar color="light" light expand = "md">
-                    <Nav className = "mr-auto" Navbar>
-                        <NavItem>
-                            <Link to="/">Home</Link>
-                        </NavItem>
-                        <NavItem>
-                            <Link to="/contact">Contact</Link>
-                        </NavItem>
-                    </Nav>
-                </Navbar>
-                <Switch>
-                    <Route exact path="/">
-                        <Suspense fallback={<div>...Loading</div>}>
-                            <HomePage/>
-                        </Suspense>
-                    </Route>
-                    <Route exact path="/contact">
-                        <Suspense fallback={<div>...Loading</div>}>
-                            <ContactPage/>
-                        </Suspense>
-                    </Route>
-                </Switch>
-            </div>
-        </Router>
-    )
+        {/* Suspense envolve todas as rotas */}
+        <Suspense fallback={<div>...Loading</div>}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/contact" element={<ContactPage />} />
+          </Routes>
+        </Suspense>
+      </div>
+    </Router>
+  );
 }
+
 export default App;

@@ -45,7 +45,7 @@ module.exports = {
             name: 'contactApp',
             filename: 'remoteEntry.js',
             exposes: {
-                './ContactPage': './src/Contact',
+                './ContactPage': './src/Contact.js',
                 }        
         }),
         
