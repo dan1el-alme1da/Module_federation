@@ -3,40 +3,51 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 
 module.exports = {
+    mode: 'development',
     entry: './src/index.js',
     output: {
         filename: '[name].js',
-        path: path.resolve(__dirname,'./dist'),
+        path: path.resolve(__dirname, 'dist'),
         publicPath: 'http://localhost:9001/',
     },
     devServer: {
-        contentBase: path.resolve(__dirname,'/dist'),
-        index: 'index.html',
-        port:9001,
-        HistoyFallbackApi: true
+        static: {
+            directory: path.resolve(__dirname, 'dist'),
+        },
+        historyApiFallback: true,  // Corrigindo 'HistoyFallbackApi' para 'historyApiFallback'
+        port: 9001,
     },
     resolve: {
-        extensions: [".jsx",".js",".json"]
+        extensions: ['.jsx', '.js', '.json'],
     },
     module: {
         rules: [
             {
-            test:/\.jsx?$/,
-            loader: require.resolve("babel-loader"),
-            options: {
-                presets: [require.resolve("@babel/preset-react")]
-            }
+                test: /\.jsx?$/,
+                loader: require.resolve('babel-loader'),
+                options: {
+                    presets: [require.resolve('@babel/preset-react')],
+                },
             },
             {
-            test: /\.css$/,
-            use: ["style-loader","css-loader"]
-            }
-        ]
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader'],
+            },
+        ],
     },
-    plugins:
-    new HtmlWebpackPlugin({
-        filename: 'index.html',
-        template: 'public/index.html',
-        title: 'App'
-    })
-}
+    plugins: [
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: 'public/index.html',
+            title: 'App',
+        }),
+        new ModuleFederationPlugin({
+            name: 'app',
+            filename: 'remoteEntry.js',
+            exposes: {
+                './App': './src/app',
+            },
+            shared: ['react', 'react-dom', 'react-router-dom'],
+        }),
+    ],
+};
