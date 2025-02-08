@@ -45,7 +45,7 @@ module.exports = {
             name: 'HomeApp',
             filename: 'remoteEntry.js',
             exposes: {
-                './HomePage': './src/Home',
+                './HomePage': './src/Home.js',
             }        
         }),
         
